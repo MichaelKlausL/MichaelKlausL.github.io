@@ -176,7 +176,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-03-29 09:44:27" itemprop="dateModified" datetime="2023-03-29T09:44:27+08:00">2023-03-29</time>
+                <time title="Modified: 2023-03-29 10:52:25" itemprop="dateModified" datetime="2023-03-29T10:52:25+08:00">2023-03-29</time>
               </span>
 
           
@@ -209,26 +209,43 @@
 </ol>
 </li>
 </ol>
-<h2 id="程序包介绍"><a href="#程序包介绍" class="headerlink" title="程序包介绍"></a>程序包介绍</h2><ol>
+<h2 id="下载程序包"><a href="#下载程序包" class="headerlink" title="下载程序包"></a>下载程序包</h2><ul>
+<li>程序包介绍</li>
+</ul>
+<ol>
 <li>下载地址 <code>(https://github.com/MichaelKlausL/ocr_service)</code></li>
 <li>包中共有两个文件夹 <code>/dist</code> 和 <code>/build</code>， <strong>可执行文件位置为</strong> <code>/dist/easyOCR.exe</code></li>
-<li><code>/dist/easyOCR.exe</code> 接收一个图片的地址，并将识别结果放在当前目录下 <code>./result/easyocr_text.txt</code>中</li>
 </ol>
+<img src="/2023/03/20/OCR-Service/java02.png" class="">
+
+<ol start="3">
+<li><p><code>/dist/easyOCR.exe</code> 接收一个图片的地址，并将识别结果放在当前目录下 <code>./result/easyocr_text.txt</code>中</p>
+</li>
+<li><p>将程序包载入项目中</p>
+</li>
+</ol>
+<img src="/2023/03/20/OCR-Service/java01.png" class="">
+
+
+
+<h2 id="下载模型"><a href="#下载模型" class="headerlink" title="下载模型"></a>下载模型</h2><ul>
+<li>方法一</li>
+</ul>
+<blockquote>
+<p> 运行程序包中 /easy_ocr/dist/init.py，这样会自动下载所需模型，但可能需要花费一些时间。</p>
+</blockquote>
+<ul>
+<li>方法二</li>
+</ul>
+<blockquote>
+<p>下载仓库中/.EasyOCR文件，并放入用户目录 C:/Users/用户名/ 中。</p>
+</blockquote>
 <h2 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h2><ol>
 <li>将当前目录切换到程序包中可执行程序所在位置  <code>cd .../easy_ocr/dist/</code></li>
 <li>以图片地址为参数调用可执行程序  <code>./easyOCR.exe ./image01.jpg</code></li>
 <li>执行完成后，当前目录下会生成 <code>./result</code> 文件夹，识别结果存储在 <code>./result/easyocr_text.txt</code>中</li>
 </ol>
-<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><h3 id="一、-下载程序包"><a href="#一、-下载程序包" class="headerlink" title="一、 下载程序包"></a>一、 下载程序包</h3><ol>
-<li>将程序包载入项目中</li>
-</ol>
-<img src="/2023/03/20/OCR-Service/java01.png" class="">
-
-<p>程序包主要包含两个主要目录<code>./build</code>和<code>./dist</code>，其中<code>./dist</code>为可执行程序目录。</p>
-<img src="/2023/03/20/OCR-Service/java02.png" class="">
-
-<p><code>./dist</code>中的<code>XXX.exe</code>即为ocr服务的可执行程序。</p>
-<h3 id="二、-使用java调用ocr服务"><a href="#二、-使用java调用ocr服务" class="headerlink" title="二、 使用java调用ocr服务"></a>二、 使用java调用ocr服务</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">Runtime</span> <span class="variable">runtime</span> <span class="operator">=</span> Runtime.getRuntime();</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="type">String</span> <span class="variable">address</span> <span class="operator">=</span> <span class="string">&quot;.../easy_ocr/dist/easyOCR.exe&quot;</span>   <span class="comment">// 此处输入程序包中的.exe位置</span></span><br><span class="line">	<span class="type">String</span> <span class="variable">paras</span> <span class="operator">=</span> <span class="string">&quot;图片地址&quot;</span>;                           <span class="comment">// 此处为需要识别的图片地址</span></span><br><span class="line">	<span class="type">String</span> <span class="variable">cmd</span> <span class="operator">=</span> address + <span class="string">&quot; &quot;</span> + paras;                 <span class="comment">// 可执行程序与地址间需要用空格隔开</span></span><br><span class="line">	<span class="type">Process</span> <span class="variable">p</span> <span class="operator">=</span> runtime.exec(cmd)                       <span class="comment">// 新建一个进程执行ocr任务 </span></span><br><span class="line">	<span class="keyword">while</span>(p.isAlive()) &#123;                    <span class="comment">// 当服务执行时，等待(可以不加，仅用于演示)</span></span><br><span class="line">    	;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><h3 id="使用java调用ocr服务"><a href="#使用java调用ocr服务" class="headerlink" title="使用java调用ocr服务"></a>使用java调用ocr服务</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">Runtime</span> <span class="variable">runtime</span> <span class="operator">=</span> Runtime.getRuntime();</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="type">String</span> <span class="variable">address</span> <span class="operator">=</span> <span class="string">&quot;.../easy_ocr/dist/easyOCR.exe&quot;</span>   <span class="comment">// 此处输入程序包中的.exe位置</span></span><br><span class="line">	<span class="type">String</span> <span class="variable">paras</span> <span class="operator">=</span> <span class="string">&quot;图片地址&quot;</span>;                           <span class="comment">// 此处为需要识别的图片地址</span></span><br><span class="line">	<span class="type">String</span> <span class="variable">cmd</span> <span class="operator">=</span> address + <span class="string">&quot; &quot;</span> + paras;                 <span class="comment">// 可执行程序与地址间需要用空格隔开</span></span><br><span class="line">	<span class="type">Process</span> <span class="variable">p</span> <span class="operator">=</span> runtime.exec(cmd)                       <span class="comment">// 新建一个进程执行ocr任务 </span></span><br><span class="line">	<span class="keyword">while</span>(p.isAlive()) &#123;                    <span class="comment">// 当服务执行时，等待(可以不加，仅用于演示)</span></span><br><span class="line">    	;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p> 执行完成后项目目录下会新建一个<code>result</code>文件夹，其中<code>easyocr_text.txt</code>为识别结果。</p>
 <img src="/2023/03/20/OCR-Service/java03.png" class="">
@@ -236,13 +253,15 @@
 
 
 <p>演示程序下载地址为：<code>https://github.com/MichaelKlausL/ocr_service</code></p>
-<h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><h3 id="一、-下载程序包-1"><a href="#一、-下载程序包-1" class="headerlink" title="一、 下载程序包"></a>一、 下载程序包</h3><h3 id="二、-使用C-调用ocr服务"><a href="#二、-使用C-调用ocr服务" class="headerlink" title="二、 使用C++调用ocr服务"></a>二、 使用C++调用ocr服务</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span>  <span class="comment">// 头文件</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">using</span> std::string</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 使用 system()函数进行系统调用，相当于直接在命令行输入命令</span></span><br><span class="line">    string address = <span class="string">&quot;.\\package\\easy_ocr\\dist\\easyOCR.exe&quot;</span>； <span class="comment">// 可执行文件位置</span></span><br><span class="line">    string paras = <span class="string">&quot;.\\image01.jpg&quot;</span>；                            <span class="comment">// 图片位置</span></span><br><span class="line">    string cmd = address + <span class="string">&quot; &quot;</span> + paras;</span><br><span class="line">    <span class="built_in">system</span>(cmd.<span class="built_in">c_str</span>());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h2><h3 id="使用C-调用ocr服务"><a href="#使用C-调用ocr服务" class="headerlink" title="使用C++调用ocr服务"></a>使用C++调用ocr服务</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span>  <span class="comment">// 头文件</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">using</span> std::string</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 使用 system()函数进行系统调用，相当于直接在命令行输入命令</span></span><br><span class="line">    string address = <span class="string">&quot;.\\package\\easy_ocr\\dist\\easyOCR.exe&quot;</span>； <span class="comment">// 可执行文件位置</span></span><br><span class="line">    string paras = <span class="string">&quot;.\\image01.jpg&quot;</span>；                            <span class="comment">// 图片位置</span></span><br><span class="line">    string cmd = address + <span class="string">&quot; &quot;</span> + paras;</span><br><span class="line">    <span class="built_in">system</span>(cmd.<span class="built_in">c_str</span>());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>结果保存在 <strong>C++ 项目可执行文件目录下</strong></p>
-<h2 id="C-1"><a href="#C-1" class="headerlink" title="C#"></a>C#</h2><h3 id="一、-下载程序包-2"><a href="#一、-下载程序包-2" class="headerlink" title="一、 下载程序包"></a>一、 下载程序包</h3><h3 id="二、-使用C-调用ocr服务-1"><a href="#二、-使用C-调用ocr服务-1" class="headerlink" title="二、 使用C#调用ocr服务"></a>二、 使用C#调用ocr服务</h3><p><strong>代码</strong></p>
+<p>演示程序下载地址为：<code>https://github.com/MichaelKlausL/ocr_service</code></p>
+<h2 id="C-1"><a href="#C-1" class="headerlink" title="C#"></a>C#</h2><h3 id="使用C-调用ocr服务-1"><a href="#使用C-调用ocr服务-1" class="headerlink" title="使用C#调用ocr服务"></a>使用C#调用ocr服务</h3><p><strong>代码</strong></p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 头文件</span></span><br><span class="line"><span class="keyword">using</span> System.Diagnostics;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用可执行文件</span></span><br><span class="line">Process p = <span class="keyword">new</span> Process();</span><br><span class="line">            p.StartInfo.FileName = (<span class="string">&quot;.../easy_ocr/dist/easyOCR.exe&quot;</span>) <span class="comment">//可执行文件位置</span></span><br><span class="line">            p.StartInfo.UseShellExecute = <span class="literal">false</span>;                     <span class="comment">// 不使用控制台启动程序</span></span><br><span class="line">            p.StartInfo.Arguments = <span class="string">&quot;图片地址&quot;</span>;      <span class="comment">// 待识别图片的地址</span></span><br><span class="line">            p.Start();                              <span class="comment">// 启动外部程序</span></span><br><span class="line">            p.WaitForExit();                        <span class="comment">// 等待执行</span></span><br><span class="line">            p.Close();                              <span class="comment">// 结束</span></span><br></pre></td></tr></table></figure>
 
 <p>结果保存在 <strong>.net 项目可执行文件目录下</strong></p>
+<p>演示程序下载地址为：<code>https://github.com/MichaelKlausL/ocr_service</code></p>
 
       
     </div>
